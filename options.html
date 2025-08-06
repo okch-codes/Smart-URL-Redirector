@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Redirector Options</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+      max-width: 800px;
+      line-height: 1.4;
+    }
+    .form-group {
+      margin: 10px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type=text] { 
+      width: 400px; 
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      background: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    button:hover {
+      background: #3367d6;
+    }
+    table { 
+      border-collapse: collapse; 
+      margin-top: 20px; 
+      width: 100%;
+    }
+    th, td { 
+      border: 1px solid #ccc; 
+      padding: 10px; 
+      text-align: left;
+    }
+    th { 
+      background: #f0f0f0; 
+      font-weight: bold;
+    }
+    .remove-btn {
+      background: #ea4335;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .remove-btn:hover {
+      background: #d33b2c;
+    }
+    .help {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+      border-left: 4px solid #4285f4;
+    }
+    .help h3 {
+      margin-top: 0;
+    }
+    .example {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart URL Redirector</h1>
+  
+  <div class="help">
+    <h3>How to use URL patterns:</h3>
+    <p><strong>From URL Pattern:</strong> Use Chrome's URL filter syntax:</p>
+    <ul>
+      <li><strong>Domain matching:</strong> <span class="example">||google.com</span> (matches domain and all subdomains)</li>
+      <li><strong>Exact prefix:</strong> <span class="example">|https://google.com/</span> (matches exact URL prefix)</li>
+      <li><strong>Wildcards:</strong> <span class="example">google.com*</span> (matches any path on domain)</li>
+      <li><strong>Path preservation:</strong> <span class="example">https://google.com/*</span></li>
+    </ul>
+    <p><strong>To URL:</strong> The destination URL. Use <span class="example">*</span> for path preservation:</p>
+    <ul>
+      <li><strong>Simple redirect:</strong> <span class="example">https://search.google.com</span></li>
+      <li><strong>Path preservation:</strong> <span class="example">https://search.google.com/*</span></li>
+    </ul>
+    <p><strong>Examples:</strong></p>
+    <ul>
+      <li><span class="example">||google.com</span> &rarr; <span class="example">https://search.google.com</span></li>
+      <li><span class="example">https://google.com/*</span> &rarr; <span class="example">https://search.google.com/*</span></li>
+    </ul>
+  </div>
+
+  <h2>Add New Redirection Rule</h2>
+  <form id="addRuleForm">
+    <div class="form-group">
+      <label for="from">From URL Pattern:</label>
+      <input type="text" id="from" placeholder="e.g., *old-site.com* or https://example.com/old-path" required>
+    </div>
+    <div class="form-group">
+      <label for="to">To URL:</label>
+      <input type="text" id="to" placeholder="e.g., https://new-site.com or https://example.com/new-path" required>
+    </div>
+    <button type="submit">Add Rule</button>
+  </form>
+
+  <h2>Current Rules</h2>
+  <table id="rulesTable">
+    <thead>
+      <tr>
+        <th>From Pattern</th>
+        <th>To URL</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="noRules" style="display: none; text-align: center; padding: 20px; color: #666;">
+    No redirection rules configured. Add one above to get started.
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
